@@ -258,6 +258,7 @@ void PikaServer::RocksdbOptionInit(blackwidow::BlackwidowOptions* bw_option) {
   bw_option->options.optimize_filters_for_hits = g_pika_conf->optimize_filters_for_hits();
   bw_option->options.level_compaction_dynamic_level_bytes = g_pika_conf->level_compaction_dynamic_level_bytes();
 
+
   if (g_pika_conf->compression() == "none") {
     bw_option->options.compression = rocksdb::CompressionType::kNoCompression;
   } else if (g_pika_conf->compression() == "snappy") {
@@ -276,6 +277,8 @@ void PikaServer::RocksdbOptionInit(blackwidow::BlackwidowOptions* bw_option) {
   bw_option->share_block_cache = g_pika_conf->share_block_cache();
   bw_option->statistics_max_size = g_pika_conf->max_cache_statistic_keys();
   bw_option->small_compaction_threshold = g_pika_conf->small_compaction_threshold();
+    // min_blob_size
+    bw_option->min_blob_size = g_pika_conf->min_blob_size();
 }
 
 void PikaServer::Start() {

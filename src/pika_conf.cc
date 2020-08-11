@@ -311,6 +311,15 @@ int PikaConf::Load()
   // slaveof
   slaveof_ = "";
   GetConfStr("slaveof", &slaveof_);
+
+
+    int64_t min_blob_size = 1024;
+    GetConfInt64("min-blob-size", &min_blob_size);
+    min_blob_size_ = (256 > min_blob_size) ? 256 : min_blob_size;
+
+
+
+
   return ret;
 }
 

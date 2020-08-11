@@ -86,6 +86,7 @@ class PikaConf : public slash::BaseConf {
   int slowlog_slower_than()     { RWLock l(&rwlock_, false); return slowlog_log_slower_than_; }
   int slowlog_max_len()         { RWLock L(&rwlock_, false); return slowlog_max_len_; }
   std::string network_interface() { RWLock l(&rwlock_, false); return network_interface_; }
+  int64_t min_blob_size() {RWLock l(&rwlock_, false); return min_blob_size_; }
 
   // Immutable config items, we don't use lock.
   bool daemonize()              { return daemonize_; }
@@ -311,7 +312,7 @@ private:
   bool write_binlog_;
   int target_file_size_base_;
   int binlog_file_size_;
-
+ int64_t min_blob_size_;
   pthread_rwlock_t rwlock_;
 };
 
